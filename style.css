@@ -1973,6 +1973,21 @@ section {
   color: var(--primary-color);
 }
 
+.contact-details {
+  color: white;
+}
+
+.contact-details a {
+  color: white;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.contact-details a:hover,
+.contact-details a:active {
+  color: #007bff;
+}
+
 section {
   max-width: 1200px;
   margin: 2rem auto;
