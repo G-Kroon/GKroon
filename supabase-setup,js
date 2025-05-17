@@ -1,0 +1,66 @@
+// Replace with your Supabase project credentials
+const SUPABASE_URL = 'https://jtkxqqdehlrpongspuhx.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imp0a3hxcWRlaGxycG9uZ3NwdWh4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDc0ODc0MzgsImV4cCI6MjA2MzA2MzQzOH0.X0nCE7UdWIOF7DDkIffbs7dlU7-hUCd-ppOW5A1-DFQ';
+
+const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+// Signup Form Handler
+document.getElementById('signup-form').addEventListener('submit', async (e) => {
+  e.preventDefault();
+
+  const name = document.getElementById('signup-name').value;
+  const email = document.getElementById('signup-email').value;
+  const password = document.getElementById('signup-password').value;
+  const whatsapp = document.getElementById('signup-whatsapp').value;
+  const country = document.getElementById('signup-country').value;
+  const messageDiv = document.getElementById('signup-message');
+
+  // 1. Create user in Supabase Auth
+  const { data, error } = await supabase.auth.signUp({
+    email,
+    password,
+    options: {
+      data: { name, whatsapp, country }
+    }
+  });
+
+  if (error) {
+    messageDiv.textContent = error.message;
+    messageDiv.className = 'error';
+    return;
+  }
+
+  // 2. Insert user details into a custom table (optional, recommended for additional info)
+  const { error: insertError } = await supabase
+    .from('users')
+    .insert([{ name, email, whatsapp, country, auth_user_id: data.user.id }]);
+
+  if (insertError) {
+    messageDiv.textContent = 'Signup succeeded but failed to save user info: ' + insertError.message;
+    messageDiv.className = 'error';
+    return;
+  }
+
+  messageDiv.textContent = 'Signup successful! Please check your email for confirmation.';
+  messageDiv.className = 'success';
+});
+
+// Login Form Handler
+document.getElementById('login-form').addEventListener('submit', async (e) => {
+  e.preventDefault();
+
+  const email = document.getElementById('login-email').value;
+  const password = document.getElementById('login-password').value;
+  const messageDiv = document.getElementById('login-message');
+
+  const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+
+  if (error) {
+    messageDiv.textContent = error.message;
+    messageDiv.className = 'error';
+    return;
+  }
+
+  messageDiv.textContent = 'Login successful! Welcome back.';
+  messageDiv.className = 'success';
+});
