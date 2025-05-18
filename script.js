@@ -40,6 +40,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
   if (totalPagesSpan) totalPagesSpan.textContent = totalPages;
 
+  /**
+   * Updates the page display by setting the current page text and toggling the visibility of release items.
+   *
+   * @returns {void}
+   */
   function updatePageDisplay() {
     if (currentPageSpan) currentPageSpan.textContent = currentPage;
     releaseItems.forEach((item, index) => {
