@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+<!--START OF HEAD SECTION-->
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width">
@@ -17,15 +18,18 @@
   <meta name="keywords" content="about-us, company-registrations, web design, web development, domain-registrations, hosting packages,smartphone repairs, entrepreneurship, job-creation, employment-creation, services-offered, affordable-services">
   <title>About Us @ GKroon</title>
   <link rel="canonical" href="https://g-kroon.github.io/GKroon/">
-  <link rel="icon" href="gk1.png" type="icon">
-  <link href="style.css" rel="stylesheet" type="text/css" />
+  <link rel="icon" href="gk1.png" type="image/png">
+  <link href="style.css" rel="stylesheet" type="text/css"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Advent+Pro:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+  <link rel="preload" href="https://fonts.googleapis.com">
+  <link rel="preload" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Advent+Pro:ital,wght@0,100..900;1,100..900&display=swap">
 </head>
+<!--END OF HEAD SECTION-->
+  
+<!--START OF BODY SECTION-->
 <body>
-  <nav class="navbar">
+  <nav class="navbar" role="navigation" aria-label="main navigation">
     <div class="logo">
       <img src="gk.png" alt="GKroon Logo">
     </div>
@@ -39,11 +43,14 @@
       <li><a href="index1.html" data-tooltip="Our Services To Entrepreneurs & Companies">Company Services</a></li>
       <li><a href="web-design.html" data-tooltip="Web Design & Development">Web Design & Development</a></li>
       <li><a href="domains-hosting.html" data-tooltip="Check Out Our Domain & Hosting Packages">Domain & Hosting</a></li>
-      <li><a href="smartphone-repairs.html" data-tootip="We Offer Smartphone Repair Services">Smartphone Repairs</a></li>
+      <li><a href="smartphone-repairs.html" data-tooltip="We Offer Smartphone Repair Services">Smartphone Repairs</a></li>
       <li><a href="https://g-kroon.github.io/Contact-Us/" data-tooltip="Contact Us">Contact Us</a></li>
       <!--<li><a href="SignupLogin.html" data-tooltip="Signup or Login">Signup/Login</a></li>-->
     </ul>
   </nav>
+  <!--END OF NAVIGATION MENU-->
+  
+    <!--START OF ABOUT US SECTION-->
     <div class="releases-container">
       <h1>About GKroon</h1>
       
@@ -88,9 +95,13 @@
         </div>
       </div>
     </div>
-
+    <!--END OF ABOUT US SECTION-->
+  
+    <!--START OF FOOTER MENU-->
     <footer class="footer">
       <div class="footer-container">
+        
+        <!--START OF SOCIAL MEDIA LINKS-->
         <div class="footer-section">
           <h3>Connect With Us</h3>
           <p>Follow us on social media.</p>
@@ -137,7 +148,8 @@
             </a>
           </div>
         </div>
-
+        <!--END OF SOCIAL MEDIA LINKS-->
+        
         <!-- New Contact Details Section -->
         <div class="footer-section">
           <h3>Contact Details</h3>
@@ -147,7 +159,9 @@
             <p><i class="fas fa-envelope"></i> <a href="mailto:info.gkroon@gmail.com">info.gkroon@gmail.com</a></p>
           </div>
         </div>
+        <!--END OF CONTACT DETAILS SECTION-->
 
+        <!--START OF LEGAL LINKS-->
         <div class="footer-section">
           <h3>Legal</h3>
           <div class="legal-links">
@@ -167,7 +181,9 @@
           </div>
         </div>
       </div>
-
+      <!--END OF LEGAL LINKS-->
+      
+      <!--COPYRIGHT-->
       <div class="copyright">
         &copy;
         <script>
@@ -175,8 +191,13 @@
         </script>
         GKroon (Pty) Ltd. All Rights Reserved.
       </div>
+      <!--END OF COPYRIGHT-->
+      
     </footer>
-
+    <!--END OF FOOTER MENU-->
+  
+    <!--START OF JAVASCRIPT LINKS-->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
     <script src="script.js"></script>
   </body>
 </html>
