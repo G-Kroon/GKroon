@@ -3,6 +3,17 @@ function redirectToPage(url) {
 }
 
 //angular.module('myApp').controller('MyController', ['$document', function($document) {//
+if ('fonts' in document) {
+  document.fonts.load('1em "Advent Pro"').then(function () {
+    document.body.classList.remove('font-loading');
+    document.body.classList.add('font-loaded');
+  });
+} else {
+  document.body.classList.remove('font-loading');
+  document.body.classList.add('font-loaded');
+}
+
+
 
   $document[0].addEventListener('DOMContentLoaded', function() {
     const hamburger = $document[0].querySelector('.hamburger');
