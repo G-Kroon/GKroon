@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width">
@@ -16,17 +16,19 @@
   <meta name="twitter:image" content="gk.png">
   <meta name="keywords" content="web-design, web-development, landing-pages, websites, basic, business, e-commerce, wordpress, wix, shopify, e-commerce-platforms, customised-websites, website-maintenance, website-redesign" >
   <title>Web Design & Development @ GKroon</title>
-  <link rel="canonical" href="https://g-kroon.github.io/GKroon/web-design.html">
-  <link rel="icon" href="gk1.png" type="icon">
+  <link rel="canonical" href="https://g-kroon.github.io/GKroon/">
+  <link rel="icon" href="gk1.png" type="image/png">
   <link href="style.css" rel="stylesheet" type="text/css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Advent+Pro:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+  <link rel="preload" href="https://fonts.googleapis.com">
+  <link rel="preloadt" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Advent+Pro:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 </head>
 
 <body>
-  <nav class="navbar">
+  
+  <!--START OF NAVIGATION MENU-->
+  <nav class="navbar" role="navigation" aria-label="main navigation">
     <div class="logo">
       <img src="gk.png" alt="GKroon Logo">
     </div>
@@ -45,7 +47,7 @@
       <!--<li><a href="SignupLogin.html" data-tooltip="Signup or Login">Signup/Login</a></li>-->
     </ul>
   </nav>
-
+  <!--END OF NAVIGATION MENU-->
 
  <div class="releases-container">
     <h1>Web Design & Development Services</h1>
@@ -55,7 +57,8 @@
       Professional web design and development services tailored to your business needs. We create modern, responsive, and user-friendly websites that help your business grow online.
     </p>
     </section>
-
+    <!--START OF SERVICE CARD SECTION-->
+   
     <section class="service-section">
       <h2>Web Design & Web Development Solutions</h2>
       <div class="service-grid">
@@ -175,7 +178,8 @@
           <a href="https://g-kroon.github.io/Contact-Us/" class="buy-btn">Get Quote</a>
         </div>
       </div>
-
+      <!--END OF SERVICE CARD SECTION-->
+      
       <section class="service-section">
         <h2>Why Choose Us?</h2>
         <p>At GKroon, we are committed to delivering high-quality web design and development services that meet your business needs. Our team of experts is dedicated to providing personalized solutions and exceptional customer service.</p>
@@ -192,7 +196,7 @@
 
 
 
-
+<!--START OF FOOTER MENU-->
   <footer class="footer">
     <div class="footer-container">
       <div class="footer-section">
@@ -233,7 +237,9 @@
       &copy; <script>document.write(new Date().getFullYear())</script> GKroon (Pty) Ltd. All Rights Reserved.
     </div>
   </footer>
-
+  <!--END OF FOOTER MENU-->
+  <!--JAVASCRIPT LINKS-->
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
