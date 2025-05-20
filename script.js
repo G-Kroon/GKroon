@@ -2,7 +2,7 @@ function redirectToPage(url) {
   window.location.href = url;
 }
 
-angular.module('myApp').controller('MyController', ['$document', function($document) {
+//angular.module('myApp').controller('MyController', ['$document', function($document) {//
 
   $document[0].addEventListener('DOMContentLoaded', function() {
     const hamburger = $document[0].querySelector('.hamburger');
