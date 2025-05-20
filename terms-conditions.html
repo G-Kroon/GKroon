@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width">
@@ -7,12 +7,13 @@
   <link rel="icon" href="gk1.png" type="icon">
   <link href="style.css" rel="stylesheet" type="text/css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Advent+Pro:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+  <link rel="preload" href="https://fonts.googleapis.com">
+  <link rel="preload" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Advent+Pro:ital,wght@0,100..900;1,100..900&display=swap">
 </head>
 <body>
-  <nav class="navbar">
+  <!--START OF NAVIGATION MENU-->
+  <nav class="navbar" role="navigation" aria-label="main navigation">
     <div class="logo">
       <img src="gk.png" alt="GKroon Logo">
     </div>
@@ -31,7 +32,7 @@
       <!--<li><a href="SignupLogin.html" data-tooltip="Signup or Login">Signup/Login</a></li>-->
     </ul>
   </nav>
-
+  <!--END OF NAVIGATION MENU-->
   <div class="releases-container">
     <h1>Terms & Conditions</h1>
     <p class="releases-intro">
@@ -56,7 +57,7 @@
       </div>
     </div>
   </div>
-
+  <!--START OF FOOTER MENU-->
   <footer class="footer">
     <div class="footer-container">
       <div class="footer-section">
@@ -106,7 +107,9 @@
       &copy; <script>document.write(new Date().getFullYear())</script> GKroon (Pty) Ltd. All Rights Reserved.
     </div>
   </footer>
-
+  <!--END OF FOOTER MENU-->
+  <!--START OF JAVASCRIPT LINKS-->
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
