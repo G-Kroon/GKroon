@@ -2,7 +2,7 @@ function redirectToPage(url) {
   window.location.href = url;
 }
 
-//angular.module('myApp').controller('MyController', ['$document', function($document) {//
+angular.module('myApp').controller('MyController', ['$document', function($document) {
 if ('fonts' in document) {
   document.fonts.load('1em "Advent Pro"').then(function () {
     document.body.classList.remove('font-loading');
