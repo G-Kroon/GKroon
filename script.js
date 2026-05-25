@@ -63,15 +63,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (overlay) overlay.addEventListener('click', closeMenu);
 
-  // Mobile dropdown toggles
+  // Mobile dropdown toggles — max-height based animation
   const dropdowns = document.querySelectorAll('.dropdown');
   dropdowns.forEach(drop => {
-    const link = drop.querySelector('a');
+    const link = drop.querySelector(':scope > a');
     if (link) {
       link.addEventListener('click', (e) => {
         if (window.innerWidth <= 900) {
           e.preventDefault();
-          drop.classList.toggle('active');
+          const isActive = drop.classList.contains('active');
+          // Close all other open dropdowns
+          dropdowns.forEach(d => {
+            if (d !== drop) d.classList.remove('active');
+          });
+          // Toggle this one
+          drop.classList.toggle('active', !isActive);
         }
       });
     }
