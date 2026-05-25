@@ -1,0 +1,18 @@
+---
+deployment:
+  tasks:
+    # set deploy path - replace YOUR_CPANEL_USERNAME with your cPanel username
+    - export DEPLOYPATH=/home/gkroon88/public_html
+    - export REPOPATH=/home/gkroon88/repositories/$CPANEL_REPO
+    # optional: run node build if package.json exists
+    - if [ -f package.json ]; then /usr/bin/npm ci --silent || true; fi
+    - if [ -f package.json ]; then /usr/bin/npm run build --silent || true; fi
+    # determine source folder: prefer dist, then public, otherwise repo root
+    - if [ -d "${REPOPATH}/dist" ]; then export SOURCE="${REPOPATH}/dist/"; elif [ -d "${REPOPATH}/public" ]; then export SOURCE="${REPOPATH}/public/"; else export SOURCE="${REPOPATH}/"; fi
+    # sync files to public_html, excluding .git, node_modules, .env, and this config
+    - /bin/rsync -aP --delete --exclude='.git' --exclude='node_modules' --exclude='.env' --exclude='.cpanel.yml' "${SOURCE}" "${DEPLOYPATH}"
+    # set directory and file permissions
+    - /bin/find "${DEPLOYPATH}" -type d -exec /bin/chmod 755 '{}' \;
+    - /bin/find "${DEPLOYPATH}" -type f -exec /bin/chmod 644 '{}' \;
+    # ensure index.html is readable
+    - if [ -f "${DEPLOYPATH}/index.html" ]; then /bin/chmod 644 "${DEPLOYPATH}/index.html"; fi
