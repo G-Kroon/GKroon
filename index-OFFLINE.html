@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GKroon Notification System</title>
+    
+    <!-- FONTS: Orbitron (Headers) & Fira Code (Body) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&family=Fira+Code:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- CONFIGURATION & PALETTE --- */
+        :root {
+            --gk-navy: #0a1124;     /* Deep Space Navy */
+            --gk-black: #050505;    /* Hard Black */
+            --gk-white: #ffffff;    /* Text White */
+            --gk-orange: #ff9f1c;   /* Neon Orange (Idle State) */
+            --gk-lime: #33ff00;     /* Matrix Lime (Active State) */
+            --gk-red: #ff003c;      /* Cyber Red (Alerts) */
+            
+            --glass-bg: linear-gradient(135deg, rgba(10, 17, 36, 0.95) 0%, rgba(2, 5, 10, 0.98) 100%);
+        }
+
+        body {
+            background-color: #e0e0e0; /* Placeholder background to show contrast */
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        /* --- 1. CONTAINER & PHYSICS --- */
+        .gk-terminal-container {
+            position: fixed;
+            bottom: 40px;
+            right: 40px;
+            z-index: 9999;
+            perspective: 1000px; /* Enables 3D depth */
+            cursor: pointer;
+            
+            /* Initial Entrance Animation */
+            animation: gk-entrance 1.2s cubic-bezier(0.19, 1, 0.22, 1) forwards;
+            opacity: 0;
+            transform: translateY(100px);
+        }
+
+        /* The 3D Card */
+        .gk-terminal-window {
+            width: 260px;
+            background: var(--gk-navy); /* Fallback */
+            background: var(--glass-bg);
+            border: 2px solid var(--gk-orange);
+            border-radius: 10px;
+            
+            /* NEON GLOW & SHADOWS */
+            box-shadow: 
+                0 20px 50px rgba(0,0,0, 0.6),         /* Drop Shadow */
+                0 0 15px rgba(255, 159, 28, 0.4),     /* Orange Halo */
+                inset 0 0 40px rgba(0,0,0, 0.8);      /* Inner Vignette */
+
+            overflow: hidden;
+            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+            
+            /* IDLE STATE: Tilted 3D Float */
+            transform: rotateY(-25deg) rotateX(10deg) translateZ(0);
+            transform-style: preserve-3d;
+            position: relative;
+        }
+
+        /* Continuous Levitation (Applied to inner window to preserve hover transform) */
+        .gk-terminal-window {
+            animation: gk-levitate 6s ease-in-out infinite;
+        }
+
+        /* --- 2. HOVER STATE (The Transformation) --- */
+        .gk-terminal-container:hover .gk-terminal-window {
+            width: 420px; /* Expansion */
+            border-color: var(--gk-lime);
+            background: #020408;
+            
+            /* Snap to 2D and Scale Up */
+            transform: rotateY(0deg) rotateX(0deg) scale(1.05);
+            
+            /* Change Glow to Lime */
+            box-shadow: 
+                0 30px 70px rgba(0,0,0, 0.8),
+                0 0 30px rgba(51, 255, 0, 0.25),
+                inset 0 0 20px rgba(51, 255, 0, 0.05);
+        }
+
+        /* --- 3. HEADER BAR --- */
+        .gk-terminal-header {
+            background: var(--gk-black);
+            padding: 10px 15px;
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            font-family: 'Orbitron', sans-serif;
+            letter-spacing: 1px;
+        }
+        
+        .gk-controls { display: flex; gap: 8px; }
+        .gk-dot { width: 10px; height: 10px; border-radius: 50%; position: relative; }
+        
+        .gk-dot.red { background: var(--gk-red); box-shadow: 0 0 8px var(--gk-red); }
+        .gk-dot.orange { background: var(--gk-orange); }
+        .gk-dot.lime { background: var(--gk-lime); }
+        
+        .gk-title {
+            color: var(--gk-white);
+            font-size: 10px;
+            font-weight: 700;
+            margin-left: auto;
+            opacity: 0.6;
+            text-shadow: 0 0 5px rgba(255,255,255,0.3);
+        }
+
+        /* --- 4. CONTENT AREA --- */
+        .gk-terminal-body {
+            padding: 20px;
+            color: var(--gk-white);
+            font-family: 'Fira Code', monospace;
+            font-size: 13px;
+            min-height: 60px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .gk-line { 
+            display: flex; 
+            margin-bottom: 8px; 
+            align-items: center; 
+            line-height: 1.5;
+        }
+        
+        /* Text Elements */
+        .gk-prompt { color: var(--gk-orange); margin-right: 12px; font-weight: bold; transition: color 0.3s; }
+        .gk-terminal-container:hover .gk-prompt { color: var(--gk-lime); }
+
+        .gk-cmd { color: var(--gk-lime); font-weight: 600; font-size: 12px; opacity: 0.9; }
+        
+        .gk-status-badge { 
+            background: rgba(255, 0, 60, 0.15);
+            color: var(--gk-red); 
+            border: 1px solid var(--gk-red);
+            padding: 2px 8px;
+            border-radius: 4px;
+            margin-left: 10px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 10px;
+            letter-spacing: 1.5px;
+            box-shadow: 0 0 10px rgba(255, 0, 60, 0.2);
+            animation: gk-pulse-red 2s infinite;
+        }
+
+        /* The Hidden Message Area */
+        .gk-line.dynamic {
+            display: none; /* Hidden by default */
+            align-items: flex-start;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px dashed rgba(255, 255, 255, 0.15);
+        }
+        
+        .gk-terminal-container:hover .gk-line.dynamic { display: flex; }
+
+        .gk-msg { color: #d0d0d0; font-weight: 400; }
+
+        /* --- 5. VISUAL EFFECTS (Scanlines & Animation) --- */
+        
+        /* CRT Scanline Overlay */
+        .gk-scanline {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(
+                to bottom, 
+                rgba(255,255,255,0), 
+                rgba(255,255,255,0) 50%, 
+                rgba(0,0,0,0.2) 50%, 
+                rgba(0,0,0,0.2)
+            );
+            background-size: 100% 4px;
+            pointer-events: none;
+            z-index: 10;
+            opacity: 0.4;
+        }
+
+        /* Animations */
+        @keyframes gk-entrance {
+            0% { opacity: 0; transform: translateY(100px) rotateY(0deg); }
+            100% { opacity: 1; transform: translateY(0px); } /* Reset transform happens in IDLE state */
+        }
+
+        @keyframes gk-levitate {
+            0%, 100% { transform: rotateY(-25deg) rotateX(10deg) translateY(0px); }
+            50% { transform: rotateY(-25deg) rotateX(10deg) translateY(-15px); }
+        }
+
+        @keyframes gk-pulse-red {
+            0% { box-shadow: 0 0 5px rgba(255, 0, 60, 0.2); }
+            50% { box-shadow: 0 0 15px rgba(255, 0, 60, 0.6); }
+            100% { box-shadow: 0 0 5px rgba(255, 0, 60, 0.2); }
+        }
+
+        .gk-cursor {
+            display: inline-block;
+            width: 8px;
+            height: 15px;
+            background: var(--gk-lime);
+            margin-left: 4px;
+            animation: gk-blink 0.8s step-end infinite;
+            vertical-align: middle;
+        }
+
+        @keyframes gk-blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+    </style>
+</head>
+<body>
+
+    <!-- NOTIFICATION COMPONENT START -->
+    <div id="gk-terminal-badge" class="gk-terminal-container">
+        <div class="gk-terminal-window">
+            
+            <!-- Window Header -->
+            <div class="gk-terminal-header">
+                <div class="gk-controls">
+                    <span class="gk-dot red"></span>
+                    <span class="gk-dot orange"></span>
+                    <span class="gk-dot lime"></span>
+                </div>
+                <span class="gk-title">SYSTEM_OVERRIDE // GKROON</span>
+            </div>
+            
+            <!-- Terminal Body -->
+            <div class="gk-terminal-body">
+                <!-- Idle State Content -->
+                <div class="gk-line static">
+                    <span class="gk-prompt">➜</span> 
+                    <span class="gk-cmd">STATUS_CHECK:</span> 
+                    <span class="gk-status-badge">OFFLINE ⌚</span>
+                </div>
+                
+                <!-- Active State Content (Typewriter) -->
+                <div class="gk-line dynamic">
+                    <span class="gk-prompt">➜</span> 
+                    <span class="gk-msg">
+                        <span id="gk-typewriter"></span><span class="gk-cursor"></span>
+                    </span>
+                </div>
+            </div>
+            
+            <!-- CRT Overlay -->
+            <div class="gk-scanline"></div>
+        </div>
+    </div>
+    <!-- NOTIFICATION COMPONENT END -->
+
+    <script>
+        (function() {
+            // --- CONFIGURATION ---
+            const container = document.getElementById('gk-terminal-badge');
+            const typeWriterElement = document.getElementById('gk-typewriter');
+            
+            // The Message
+            const text = "Hello & Welcome to GKroon. 👋 We're currently offline for maintenance and updates. Stay tuned for a refreshed experience.";
+            
+            // Typing Speed (Lower number = Faster)
+            const typingSpeed = 25; 
+
+            // --- STATE VARIABLES ---
+            let i = 0;
+            let timer;
+            let hasTyped = false;
+
+            // --- FUNCTIONS ---
+            function typeWriter() {
+                if (i < text.length) {
+                    // Using charAt ensures we handle emojis correctly in most modern browsers
+                    typeWriterElement.textContent += text.charAt(i);
+                    i++;
+                    timer = setTimeout(typeWriter, typingSpeed);
+                }
+            }
+
+            function resetText() {
+                clearTimeout(timer);
+                typeWriterElement.textContent = "";
+                i = 0;
+                hasTyped = false;
+            }
+
+            // --- EVENTS ---
+            
+            // Trigger on Mouse Enter
+            container.addEventListener('mouseenter', () => {
+                if (!hasTyped) {
+                    resetText(); // Safety clear
+                    typeWriter();
+                    hasTyped = true; // Lock prevents re-typing while still hovering
+                }
+            });
+
+            // Reset on Mouse Leave
+            container.addEventListener('mouseleave', () => {
+                resetText();
+            });
+        })();
+    </script>
+</body>
+</html>

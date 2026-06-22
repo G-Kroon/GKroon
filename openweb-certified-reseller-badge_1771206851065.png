@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!--START OF HEAD SECTION-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <meta name="description" content="Microsoft Office 365 Packages Offered By GKroon">
+  <meta name="robots" content="index, follow">
+  <meta name="author" content="Jonathan Peters">
+  <meta property="og:title" content="Microsoft Office 365 Packages">
+  <meta property="og:description" content="Microsoft Office 365 Packages By GKroon.">
+  <meta property="og:image" content="gk.png">
+  <meta property="og:url" content="https://g-kroon.github.io/GKroon/">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Microsoft Office 365 Packages @ GKroon">
+  <meta name="twitter:description" content="Microsoft Office 365 Packages Offered By GKroon.">
+  <meta name="twitter:image" content="gk.png">
+  <meta name="keywords"
+    content="smartphone, repairs, smartphones, smartphone-repairs, charging-ports, batteries, lcd's, screen-repairs, screens">
+  <link rel="canonical" href="https://g-kroon.github.io/GKroon/microsoft365.html">
+  <title>Microsoft Office 365 Packages @ GKroon</title>
+  <link rel="canonical" href="https://g-kroon.github.io/GKroon/">
+  <link rel="icon" href="gk1.png" type="image/png">
+  <link href="style.css" rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Alan+Sans:wght@300;400;500;600;700;800;900&family=Intel+One+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+
+  <!--START OF HOTJAR TRACKING CODE-->
+  <script>
+    (function (h, o, t, j, a, r) {
+      h.hj = h.hj || function () {(h.hj.q = h.hj.q || []).push(arguments)};
+      h._hjSettings = {hjid: 6411846, hjsv: 6};
+      a = o.getElementsByTagName('head')[0];
+      r = o.createElement('script'); r.async = 1;
+      r.src = t + h._hjSettings.hjid + j + h._hjSettings.hjsv;
+      a.appendChild(r);
+    })(window, document, 'https://static.hotjar.com/c/hotjar-', '.js?sv=');
+  </script>
+  <!--END OF HOTJAR TRACKING CODW-->
+
+</head>
+<!--END OF HEAD SECTION-->
+
+<!--START OF BODY SECTION-->
+<body>
+
+  <!--START OF NAVIGATION MENU-->
+  <nav class="navbar" role="navigation" aria-label="main navigation">
+    
+  <!--<div class="logo">
+    <img src="gk.png" alt="GKroon Logo">
+  </div>-->
+
+  <div class="logo">
+    <a href="index.html">
+      <img src="gk.png" alt="GKroon Logo" class="gkroon-logo">
+    </a>
+    <!-- Openweb reseller logo: responsive + animated + shadow hover -->
+    <a href="openweb.html" class="openweb-logo" aria-label="Openweb Certified Reseller" title="Openweb Certified Reseller">
+      <img src="openweb-certified-reseller-badge.png"
+           alt="Openweb Certified Reseller badge"
+           class="reseller-badge"
+           loading="lazy">
+    </a>
+  </div>
+
+    
+    <button class="hamburger">
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </button>
+    <ul class="nav-menu">
+      <li><a href="index.html" data-tooltip="Learn-about-GKroon">About</a></li>
+      <li><a href="index1.html" data-tooltip="Our-Services-To-Entrepreneurs-&-Companies">CIPC Services</a></li>
+      <li class="dropdown">
+        <a href="#" data-tooltip="Explore-Our-Services">Connectivity Services<i class="fas fa-caret-down"></i></a>
+        <ul class="dropdown-content">
+          <li><a href="domains.html" data-tooltip="Email-&-Web-Hosting-Services">Email & Web Hosting</a></li>
+          <!--<li><a href="services.html" data-tooltip="MTN-Mobile-4G/5G-Data">MTN Mobile 4G/5G Data</a></li>-->
+          <!--<li><a href="services.html" data-tooltip="MTN-Fixed-4G/5G-Data">MTN Fixed 4G/5G Data</a></li>-->
+          <li><a href="microsoft365.html" data-toolset="Microsoft-365 Office Packages">Microsoft Office 365 Packages</a></li>
+          <!--<li><a href="services.html" data-tooltip="OpenServe-Fibre">OpenServe Fibre</a></li>-->
+          <!--<li><a href="services.html" data-tooltip="Blank-Sim-Card-Packages">Sim Packages</a></li>-->
+          <!--<li><a href="services.html" data-tooltip="Telkom-Data>Telkom</a></li>-->
+          <!--<li><a href="services.html" data-tooltip="Telkom-One">Telkom One</a></li>-->
+          <!--<li><a href="services.html" data-tooltip="Voice-SIP">Voice(SIP)</a></li>-->
+          <!--<li><a href="services.html" data-tooltip="Linux-VPS">VPS/Compute Instance</a></li>-->
+        </ul>
+      </li>
+      <li><a href="web-design.html" data-tooltip="Web-Design-&-Web-Development">Web Design & Development</a></li>
+      <li><a href="smartphone-repairs.html" data-tooltip="We Offer Smartphone Repair Services">Smartphone Repairs</a>
+      </li>
+      <li><a href="https://g-kroon.github.io/Contact-Us/" data-tooltip="Contact Us">Contact Us</a></li>
+    </ul>
+  </nav>
+  
+<!--END OF NAVIGATION MENU-->
+
+  <!--START OF SERVICE CARD SECTION-->
+  <div class="releases-container">
+    <h1>Microsoft Office 365 Packages</h1>
+    <p class="releases-intro">
+      We offer a range of Microsoft Office 365 Packages to suit your business needs. From Startup To Corporate
+    </p>
+
+    <section class="service-section">
+      <h2>Microsoft Office 365 Packages</h2>
+      <div class="service-grid">
+        <div class="service-card">
+          <div class="service-icon"><i class="fas fa-mobile-alt"></i></div>
+          <h3>Microsoft Office 365 Basic</h3>
+          <p class="price">R350 pm</p>
+          <ul class="features">
+            <li>Mobile & Web Versions</li>
+            <li>Excel, Word, PowerPoint, Outlook & OneNote</li>
+            <li>Exchange, OneDrive, SharePoint, Teams</li>
+            <li>Identity & Access Management</li>
+          </ul>
+          <a href="https://paystack.shop/pay/365-basic" class="buy-btn">Get MS 365 Basic</a>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon"><i class="fas fa-battery-full"></i></div>
+          <h3>Microsoft Office 365 Business</h3>
+          <p class="price">R650 pm</p>
+          <ul class="features">
+            <li>Desktop, Web & Mobile Versions</li>
+            <li>Excel, Word, PowerPoint, Outlook, OneNote</li>
+            <li>Publisher (PC ONly), Access (PC Only)</li>
+            <li>Exchange, OneDrive, SharePoint, Teams</li>
+          </ul>
+          <a href="https://paystack.shop/pay/365-business" class="buy-btn">Get MS 365 Business</a>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon"><i class="fas fa-bolt"></i></div>
+          <h3>Microsoft Office 365 Business Premium</h3>
+          <p class="price">R850 pm</p>
+          <ul class="features">
+            <li>Desktop, Web & Mobile Versions</li>
+            <li>Excel, Word, PowerPoint, Outlook, OneNote</li>
+            <li>Publisher (PC ONly), Access (PC Only)</li>
+            <li>Exchange, OneDrive, SharePoint, Teams</li>
+          </ul>
+          <a href="https://paystack.shop/pay/365-premium" class="buy-btn">Get MS 365 Premium</a>
+        </div>
+      </div>
+    </section>
+  </div>
+  <!--END OF SERVICE CARD SECTION-->
+
+  <!--START OF FOOTER MENU-->
+  <footer class="footer">
+    <div class="footer-container">
+
+      <!--START OF SOCIAL MEDIA LINKS-->
+      <div class="footer-section">
+        <h3>Connect With Us</h3>
+        <p>Follow us on social media.</p>
+        <div class="social-icons">
+          <a href="https://www.facebook.com/GKroonPtyLtd" target="_blank" rel="noopener noreferrer" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+          <!--<a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+          <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>-->
+          <a href="https://wa.me/+27661199255" target="_blank" rel="noopener noreferrer" class="social-icon"><i class="fab fa-whatsapp"></i></a>
+          <a href="https://linkedin.com/company/gkroon" target="_blank" rel="noopener noreferrer" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+      </div>
+      <!--END OF SOCIAL MEDIA LINKS-->
+
+      <!--START OF CONTACT DETAILS-->
+      <div class="footer-section">
+        <h3>Contact Details</h3>
+        <div class="contact-details">
+          <p><i class="fas fa-phone"></i> <a href="tel:+27661199255">+27 66 119 9255</a></p>
+          <p><i class="fas fa-envelope"></i> <a href="mailto:info.gkroon@gmail.com">info.gkroon@gmail.com</a></p>
+        </div>
+      </div>
+      <!--END OF CONTACT DETAILS-->
+
+      <!--START OF LEGAL LINKS-->
+      <div class="footer-section">
+        <h3>Legal</h3>
+        <div class="legal-links">
+          <a href="privacy-policy.html" class="legal-link">Privacy Policy</a>
+          <a href="terms-conditions.html" class="legal-link">Terms & Conditions</a>
+          <a href="disclaimer.html" class="legal-link">Disclaimer</a>
+          <a href="refund-policy.html" class="legal-link">Refund Policy</a>
+          <a href="https://g-kroon.github.io/Contact-Us/" class="legal-link">Contact Us</a>
+        </div>
+      </div>
+    </div>
+    <!--END OF LEGAL LINKS-->
+
+    <!--COPYRIGHT-->
+    <div class="copyright">
+      &copy;
+      <script>document.write(new Date().getFullYear())</script> GKroon (Pty) Ltd. All Rights Reserved.
+    </div>
+    <!--END OF COPYRIGHT-->
+
+  </footer>
+  <!--END OF FOOTER MENU-->
+
+  <!--START OF JAVASCRIPT LINKS-->
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+  <script src="gkroonscript.merged.js"></script>
+  
+  <!--<script src="script.js"></script>
+  <script src="nav-toggle.js"></script>-->
+  <!--END OF JAVASCRIPT LINKS-->
+  
+</body>
+<!--END OF BODY SECTION-->
+
+</html>
