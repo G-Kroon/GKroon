@@ -41,7 +41,7 @@ Preferred communication style: Simple, everyday language.
 ### Third-Party Services 
 - **GitHub Pages**: Primary hosting destination (g-kroon.github.io/GKroon/)
 - **Hotjar**: User analytics and behavior tracking
-- **SupaBase: Configured for User Authentication & external Database
+- **SupaBase**: Configured for User Authentication & external Database
 
 ### External Links
 - WhatsApp Business integration for customer contact
