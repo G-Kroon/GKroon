@@ -2,7 +2,7 @@
 
 ## Overview
 
-GKroon is a South African business services company website offering multiple services including company registrations, web design & development, domain & hosting packages, smartphone repairs, and blockchain development. The site is a multi-page static website with a simple Express.js server for serving content and handling basic backend functionality.
+GKroon is a South African business services company website offering multiple services including company registrations, web design & development, domain & hosting packages, smartphone repairs. The site is a multi-page static website with a simple Express.js server for serving content and handling basic backend functionality.
 
 ## User Preferences
 
@@ -24,12 +24,6 @@ Preferred communication style: Simple, everyday language.
 - **Port**: Configurable via environment variable, defaults to 5000
 - **Middleware**: body-parser for handling form data (JSON and URL-encoded)
 
-### Authentication
-- **Provider**: Supabase (external BaaS)
-- **Implementation**: Client-side JavaScript using Supabase JS SDK via CDN
-- **Features**: User signup/login with email, password.
-- **Configuration**: Supabase URL and anonymous key stored
-
 ### Analytics
 - **Service**: Hotjar tracking integrated across all pages for user behavior analytics
 
@@ -43,14 +37,14 @@ Preferred communication style: Simple, everyday language.
 ### CDN Resources
 - Font Awesome 5.15.4 - Icon library
 - Google Fonts (Advent Pro) - Typography
-- Supabase JS SDK v2 - Authentication and database client
 
-### Third-Party Services
-- **Supabase**: Backend-as-a-Service for user authentication and data storage (Project: jtkxqqdehlrpongspuhx)
-- **Hotjar**: User analytics and behavior tracking (ID: 6411846)
+### Third-Party Services 
 - **GitHub Pages**: Primary hosting destination (g-kroon.github.io/GKroon/)
+- **Hotjar**: User analytics and behavior tracking
+- **SupaBase: Configured for User Authentication & external Database
 
 ### External Links
 - WhatsApp Business integration for customer contact
 - LinkedIn company page
 - Separate Contact Us page hosted on GitHub Pages subdomain
+- Client Login for Connectivity Services (Existing & Potential Clients)
