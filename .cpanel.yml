@@ -1,0 +1,6 @@
+---
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home/gkroon88/public_html/
+    # Copy all files except ignored ones
+    - /bin/rsync -av --exclude='.git' --exclude='.gitignore' --exclude='README.md' --exclude='LICENSE' --exclude='docs/' --exclude='tests/' ./ $DEPLOYPATH
