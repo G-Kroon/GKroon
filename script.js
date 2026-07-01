@@ -304,3 +304,128 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 });
+
+// START OF WEBSITE SUSPENDED ANIMATION NOTIFICATION //
+/* Notification banner behavior - include at end of <body> or in your JS bundle */
+
+(function () {
+  // Config: full message to type
+  const fullMessage = " Our website: https://gkroon.sbs is currently suspended & undergoing maintenance.";
+  const typingSpeed = 40; // ms per character
+  const pauseAfter = 800; // ms pause after typing before subtle loop
+  const storageKey = "siteNoticeDismissed_v1";
+
+  // Elements
+  const banner = document.getElementById("site-notice");
+  const typedEl = document.getElementById("notice-typed");
+  const closeBtn = document.getElementById("notice-close");
+  const detailsBtn = document.getElementById("notice-details");
+  const moreEl = document.getElementById("notice-more");
+
+  // If user dismissed previously, hide banner
+  if (localStorage.getItem(storageKey) === "true") {
+    banner.classList.add("hidden");
+    banner.setAttribute("aria-hidden", "true");
+    return;
+  }
+
+  // Typing effect (progressive)
+  function typeText(el, text, speed) {
+    el.textContent = "";
+    el.classList.add("cursor"); // show cursor
+    let i = 0;
+    function step() {
+      if (i < text.length) {
+        el.textContent += text.charAt(i);
+        i++;
+        // small random jitter to feel organic
+        const jitter = Math.random() * 20 - 10;
+        setTimeout(step, Math.max(10, speed + jitter));
+      } else {
+        // finished typing
+        setTimeout(() => {
+          // keep cursor for a moment, then remove
+          el.classList.remove("cursor");
+          // subtle loop: fade in/out glow on typed text
+          el.animate(
+            [{ textShadow: "0 2px 12px rgba(0,0,0,0.6)" }, { textShadow: "0 2px 18px rgba(255,204,0,0.12)" }, { textShadow: "0 2px 12px rgba(0,0,0,0.6)" }],
+            { duration: 2200, iterations: Infinity }
+          );
+        }, pauseAfter);
+      }
+    }
+    step();
+  }
+
+  // Start typing after small delay so entrance animation completes
+  setTimeout(() => typeText(typedEl, fullMessage, typingSpeed), 420);
+
+  // Close button behavior: hide and remember
+  closeBtn.addEventListener("click", function () {
+    banner.classList.add("hidden");
+    banner.setAttribute("aria-hidden", "true");
+    // persist dismissal for 7 days
+    try {
+      localStorage.setItem(storageKey, "true");
+    } catch (e) {
+      // ignore storage errors
+    }
+  });
+
+  // Details toggle
+  detailsBtn.addEventListener("click", function () {
+    const expanded = detailsBtn.getAttribute("aria-expanded") === "true";
+    if (expanded) {
+      moreEl.hidden = true;
+      detailsBtn.setAttribute("aria-expanded", "false");
+    } else {
+      moreEl.hidden = false;
+      detailsBtn.setAttribute("aria-expanded", "true");
+      // Move focus into details for keyboard users
+      moreEl.querySelector("p")?.focus?.();
+    }
+  });
+
+  // Keyboard: allow Esc to dismiss
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape") {
+      if (!banner.classList.contains("hidden")) {
+        closeBtn.click();
+      }
+    }
+  });
+
+  // Accessibility: ensure banner is announced on load for screen readers
+  // We set role="status" and aria-live="polite" in HTML; for extra compatibility:
+  setTimeout(() => {
+    banner.setAttribute("aria-hidden", "false");
+  }, 700);
+
+  // Ensure banner doesn't cover content on mobile: add top padding to body equal to banner height
+  function adjustBodyPadding() {
+    const computed = window.getComputedStyle(banner);
+    if (banner.classList.contains("hidden")) {
+      document.documentElement.style.setProperty("--banner-height", "0px");
+      document.body.style.paddingTop = "";
+      return;
+    }
+    // measure banner height
+    const rect = banner.getBoundingClientRect();
+    const h = Math.ceil(rect.height);
+    document.body.style.paddingTop = h + "px";
+  }
+  // Run on load and resize
+  window.addEventListener("load", adjustBodyPadding);
+  window.addEventListener("resize", adjustBodyPadding);
+  // Also run shortly after to catch fonts/layout
+  setTimeout(adjustBodyPadding, 800);
+
+  // If user prefers reduced motion, skip typing and animations
+  const prefersReduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (prefersReduced) {
+    typedEl.textContent = fullMessage;
+    typedEl.classList.remove("cursor");
+  }
+})();
+// END OF WEBSITE SUSPENDED ANIMATION NOTIFICATION //
+
