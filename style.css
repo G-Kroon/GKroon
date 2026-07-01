@@ -1586,3 +1586,199 @@ body.light-mode .cc-title { color: var(--text-primary); }
   background: linear-gradient(90deg, transparent, rgba(0,102,204,0.4), transparent);
   margin: 2rem 0;
 }
+
+/* START OF WEBSITE SUSPENDED ANIMATION NOTIFICATION */
+/* Notification banner styles - put in <head> or main stylesheet */
+
+/* Screen-reader only helper */
+.sr-only {
+  position: absolute !important;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+}
+
+/* Root variables for easy theming */
+:root {
+  --notice-bg: linear-gradient(90deg, #0f172a, #001f3f);
+  --accent: #ffcc00;
+  --text: #ffffff;
+  --muted: rgba(255,255,255,0.85);
+  --shadow: 0 6px 18px rgba(0,0,0,0.45);
+  --height: 64px;
+  --mobile-height: 84px;
+  --z: 99999;
+}
+
+/* Container: fixed to top, full width */
+.site-notice {
+  position: fixed;
+  inset: 0 auto auto 0; /* top:0; left:0; right:0 */
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: var(--z);
+  background: var(--notice-bg);
+  color: var(--text);
+  box-shadow: var(--shadow);
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transform: translateY(-120%); /* start hidden above */
+  animation: slideDown 700ms cubic-bezier(.2,.9,.3,1) forwards;
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .site-notice { animation: none; transform: translateY(0); }
+}
+
+/* Inner layout */
+.notice-inner {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 12px 16px;
+  height: var(--height);
+}
+
+/* Icon */
+.notice-icon {
+  font-size: 22px;
+  padding: 8px;
+  border-radius: 8px;
+  background: rgba(255,255,255,0.06);
+  box-shadow: 0 4px 14px rgba(0,0,0,0.35), 0 0 18px rgba(255,204,0,0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Content area */
+.notice-content {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow: hidden;
+}
+
+/* Prefix (static) */
+.notice-prefix {
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  color: var(--accent);
+  text-shadow: 0 0 8px rgba(255,204,0,0.18);
+  flex: 0 0 auto;
+}
+
+/* Typed text area */
+.notice-typed {
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+  font-weight: 600;
+  color: var(--muted);
+  text-shadow: 0 2px 12px rgba(0,0,0,0.6);
+  font-size: 0.98rem;
+  min-width: 0;
+}
+
+/* Cursor effect (pseudo-element via JS toggling class) */
+.notice-typed.cursor::after {
+  content: "";
+  display: inline-block;
+  width: 2px;
+  height: 1.05em;
+  margin-left: 6px;
+  vertical-align: middle;
+  background: var(--accent);
+  animation: blink 1s steps(2, start) infinite;
+  box-shadow: 0 0 8px rgba(255,204,0,0.9);
+}
+
+/* Controls */
+.notice-controls {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex: 0 0 auto;
+}
+
+/* Buttons */
+.notice-btn {
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.06);
+  color: var(--text);
+  padding: 8px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  backdrop-filter: blur(4px);
+  transition: transform .12s ease, box-shadow .12s ease, background .12s ease;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+}
+.notice-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 26px rgba(0,0,0,0.35); }
+.notice-close { font-size: 16px; padding: 6px 8px; }
+
+/* Expandable details */
+.notice-more {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 12px 16px 18px 16px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  border-top: 1px solid rgba(255,255,255,0.03);
+  color: var(--muted);
+  font-size: 0.95rem;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.02);
+}
+
+/* Small screens: stack and increase height */
+@media (max-width: 640px) {
+  .notice-inner { flex-direction: row; align-items: center; padding: 14px; height: var(--mobile-height); gap: 10px; }
+  .notice-prefix { font-size: 0.92rem; }
+  .notice-typed { font-size: 0.9rem; }
+  .notice-controls { gap: 6px; }
+}
+
+/* Typing glow animation for the whole banner (subtle) */
+@keyframes glowPulse {
+  0% { box-shadow: 0 6px 18px rgba(0,0,0,0.45); }
+  50% { box-shadow: 0 10px 30px rgba(0,0,0,0.55), 0 0 30px rgba(255,204,0,0.06); }
+  100% { box-shadow: 0 6px 18px rgba(0,0,0,0.45); }
+}
+.site-notice { animation: slideDown 700ms cubic-bezier(.2,.9,.3,1) forwards, glowPulse 4.5s ease-in-out infinite; }
+
+/* Slide down entrance */
+@keyframes slideDown {
+  from { transform: translateY(-120%); }
+  to { transform: translateY(0); }
+}
+
+/* Cursor blink */
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+/* Shadowed text flicker for prefix (tiny shimmer) */
+@keyframes prefixShimmer {
+  0% { text-shadow: 0 0 6px rgba(255,204,0,0.08); transform: translateY(0); }
+  50% { text-shadow: 0 0 18px rgba(255,204,0,0.18); transform: translateY(-1px); }
+  100% { text-shadow: 0 0 6px rgba(255,204,0,0.08); transform: translateY(0); }
+}
+.notice-prefix { animation: prefixShimmer 3.6s ease-in-out infinite; }
+
+/* Hide banner when dismissed (class toggled by JS) */
+.site-notice.hidden { transform: translateY(-120%); transition: transform 300ms ease-in; pointer-events: none; }
+
+/* Respect reduced motion: remove glows and long animations */
+@media (prefers-reduced-motion: reduce) {
+  .site-notice, .notice-prefix, .site-notice * { animation: none !important; transition: none !important; }
+  .notice-typed.cursor::after { animation: none; opacity: 1; }
+}
+/* END OF SUSPENEDED WEBSITE ANIMATION NOTIFICATION */
+
