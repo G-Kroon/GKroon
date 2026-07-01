@@ -1588,6 +1588,8 @@ body.light-mode .cc-title { color: var(--text-primary); }
 }
 
 /* START OF WEBSITE SUSPENDED ANIMATION NOTIFICATION */
+/* css/style.css */
+
 /* Screen-reader only helper */
 .sr-only {
   position: absolute !important;
@@ -1778,6 +1780,7 @@ body.light-mode .cc-title { color: var(--text-primary); }
   .site-notice, .notice-prefix, .site-notice * { animation: none !important; transition: none !important; }
   .notice-typed.cursor::after { animation: none; opacity: 1; }
 }
+
 
 /* END OF SUSPENEDED WEBSITE ANIMATION NOTIFICATION */
 
