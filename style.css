@@ -1588,7 +1588,7 @@ body.light-mode .cc-title { color: var(--text-primary); }
 }
 
 /* START OF WEBSITE SUSPENDED ANIMATION NOTIFICATION */
-/* css/style.css */
+/* css/style.css - banner styles */
 
 /* Screen-reader only helper */
 .sr-only {
@@ -1604,13 +1604,13 @@ body.light-mode .cc-title { color: var(--text-primary); }
   --accent: #ffcc00;
   --text: #ffffff;
   --muted: rgba(255,255,255,0.9);
-  --shadow: 0 8px 30px rgba(0,0,0,0.5);
-  --height: 64px;
-  --mobile-height: 84px;
-  --z: 2147483646; /* extremely high so it sits above nav */
+  --shadow: 0 10px 40px rgba(0,0,0,0.55);
+  --height: 68px;
+  --mobile-height: 92px;
+  --z: 2147483647; /* topmost */
 }
 
-/* Fixed banner at very top */
+/* Fixed banner at very top above nav/logo */
 .site-notice {
   position: fixed;
   top: 0;
@@ -1620,17 +1620,26 @@ body.light-mode .cc-title { color: var(--text-primary); }
   background: var(--notice-bg);
   color: var(--text);
   box-shadow: var(--shadow);
-  transform: translateY(-140%); /* start hidden above */
+  transform: translateY(-160%); /* hidden above */
   will-change: transform;
-  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
 }
 
-/* Entrance animation */
+/* Visible state */
 .site-notice.show {
-  animation: slideDown 420ms cubic-bezier(.2,.9,.3,1) forwards;
+  transform: translateY(0);
+  transition: transform 420ms cubic-bezier(.2,.9,.3,1);
+  animation: glowPulse 4.5s ease-in-out infinite;
 }
 
-/* Inner layout */
+/* Hidden state */
+.site-notice.hidden {
+  transform: translateY(-160%);
+  transition: transform 260ms ease-in;
+  pointer-events: none;
+}
+
+/* Layout */
 .notice-inner {
   display: flex;
   align-items: center;
@@ -1670,6 +1679,7 @@ body.light-mode .cc-title { color: var(--text-primary); }
   letter-spacing: 0.06em;
   color: var(--accent);
   text-shadow: 0 0 8px rgba(255,204,0,0.18);
+  animation: prefixShimmer 3.6s ease-in-out infinite;
 }
 
 /* Typed text */
@@ -1684,7 +1694,7 @@ body.light-mode .cc-title { color: var(--text-primary); }
   min-width: 0;
 }
 
-/* Cursor pseudo via class */
+/* Cursor */
 .notice-typed.cursor::after {
   content: "";
   display: inline-block;
@@ -1715,13 +1725,13 @@ body.light-mode .cc-title { color: var(--text-primary); }
   cursor: pointer;
   font-weight: 600;
   backdrop-filter: blur(4px);
-  transition: transform .12s ease, box-shadow .12s ease, background .12s ease;
+  transition: transform .12s ease, box-shadow .12s ease;
   box-shadow: 0 6px 18px rgba(0,0,0,0.25);
 }
 .notice-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 26px rgba(0,0,0,0.35); }
 .notice-close { font-size: 16px; padding: 6px 8px; }
 
-/* Expandable details */
+/* Details area */
 .notice-more {
   max-width: 1200px;
   margin: 0 auto;
@@ -1739,40 +1749,18 @@ body.light-mode .cc-title { color: var(--text-primary); }
   .notice-typed { font-size: 0.9rem; }
 }
 
-/* Glow and subtle pulse */
+/* Animations */
 @keyframes glowPulse {
   0% { box-shadow: var(--shadow); }
-  50% { box-shadow: 0 12px 40px rgba(0,0,0,0.6), 0 0 30px rgba(255,204,0,0.06); }
+  50% { box-shadow: 0 14px 48px rgba(0,0,0,0.65), 0 0 30px rgba(255,204,0,0.06); }
   100% { box-shadow: var(--shadow); }
 }
-.site-notice { animation: none; }
-.site-notice.show { animation: slideDown 420ms cubic-bezier(.2,.9,.3,1) forwards, glowPulse 4.5s ease-in-out infinite; }
-
-/* Slide down */
-@keyframes slideDown {
-  from { transform: translateY(-140%); }
-  to { transform: translateY(0); }
-}
-
-/* Cursor blink */
-@keyframes blink {
-  0%, 50% { opacity: 1; }
-  51%, 100% { opacity: 0; }
-}
-
-/* Prefix shimmer */
+@keyframes slideDown { from { transform: translateY(-140%); } to { transform: translateY(0); } }
+@keyframes blink { 0%,50%{opacity:1}51%,100%{opacity:0} }
 @keyframes prefixShimmer {
   0% { text-shadow: 0 0 6px rgba(255,204,0,0.08); transform: translateY(0); }
   50% { text-shadow: 0 0 18px rgba(255,204,0,0.18); transform: translateY(-1px); }
   100% { text-shadow: 0 0 6px rgba(255,204,0,0.08); transform: translateY(0); }
-}
-.notice-prefix { animation: prefixShimmer 3.6s ease-in-out infinite; }
-
-/* Hidden state (moved up) */
-.site-notice.hidden {
-  transform: translateY(-140%);
-  transition: transform 260ms ease-in;
-  pointer-events: none;
 }
 
 /* Respect reduced motion */
@@ -1780,7 +1768,6 @@ body.light-mode .cc-title { color: var(--text-primary); }
   .site-notice, .notice-prefix, .site-notice * { animation: none !important; transition: none !important; }
   .notice-typed.cursor::after { animation: none; opacity: 1; }
 }
-
 
 /* END OF SUSPENEDED WEBSITE ANIMATION NOTIFICATION */
 
