@@ -27,36 +27,35 @@
 <body>
   
 <!-- START OF WEBSITE SUSPENDED ANIMATION NOTIFICATON -->
-  <!-- ===== Notification banner: place this at the very top of <body> ===== -->
-  <div id="site-notice" class="site-notice" role="status" aria-live="polite" aria-atomic="true" aria-hidden="true">
-    <div class="notice-inner">
-      <div class="notice-icon" aria-hidden="true">⚠️</div>
+  <!-- Put this as the very first element inside <body> -->
+<div id="site-notice" class="site-notice hidden" role="status" aria-live="polite" aria-atomic="true" aria-hidden="true">
+  <div class="notice-inner">
+    <div class="notice-icon" aria-hidden="true">⚠️</div>
 
-      <div class="notice-content">
-        <span class="notice-prefix">PLEASE NOTE!!</span>
-        <span id="notice-typed" class="notice-typed" aria-hidden="false"></span>
-        <span class="sr-only" id="notice-full">Our website: https://gkroon.sbs is currently suspended & undergoing maintenance.</span>
-      </div>
-
-      <div class="notice-controls">
-        <button id="notice-details" class="notice-btn notice-details" aria-expanded="false" aria-controls="notice-more">
-          Details
-        </button>
-        <button id="notice-close" class="notice-btn notice-close" aria-label="Dismiss notification">
-          ✕
-        </button>
-      </div>
+    <div class="notice-content">
+      <span class="notice-prefix">PLEASE NOTE!!</span>
+      <span id="notice-typed" class="notice-typed" aria-hidden="false"></span>
+      <span class="sr-only" id="notice-full">Our website: https://gkroon.sbs is currently suspended & undergoing maintenance.</span>
     </div>
 
-    <div id="notice-more" class="notice-more" hidden>
-      <p tabindex="-1">
-        <strong>Site:</strong> https://gkroon.sbs — <strong>Status:</strong> Suspended for maintenance.
-        We are working to restore service. Thank you for your patience.
-      </p>
+    <div class="notice-controls">
+      <button id="notice-details" class="notice-btn notice-details" aria-expanded="false" aria-controls="notice-more">
+        Details
+      </button>
+      <button id="notice-close" class="notice-btn notice-close" aria-label="Dismiss notification">
+        ✕
+      </button>
     </div>
   </div>
-  <!-- ===== End banner ===== -->
-  
+
+  <div id="notice-more" class="notice-more" hidden>
+    <p tabindex="-1">
+      <strong>Site:</strong> https://gkroon.sbs — <strong>Status:</strong> Suspended for maintenance.
+      We are working to restore service. Thank you for your patience.
+    </p>
+  </div>
+</div>
+
 <!-- END OF WEBSITE SUSPENDED ANIMATION NOTIFICATON -->
 
   
