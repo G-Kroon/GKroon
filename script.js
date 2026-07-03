@@ -307,31 +307,37 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // START OF WEBSITE SUSPENDED ANIMATION NOTIFICATION //
 /* js/script.js
-   - Shows automatically on page load
-   - Reappears every 3 seconds (repeatInterval)
-   - Clicking "✕" permanently dismisses and stops repeating (persisted in localStorage)
-   - Respects prefers-reduced-motion
+   Behavior:
+   - Banner appears on page load and stays visible long enough for typing to complete.
+   - Banner reappears every 3 seconds (configurable) and auto-hides after each appearance.
+   - Clicking ✕ permanently dismisses the banner (persisted in localStorage).
+   - Adjusts body padding so banner doesn't cover top nav/logo.
+   - Respects prefers-reduced-motion.
 */
 
 (function () {
+  // ---------- Configuration ----------
   const fullMessage = " Our website: https://gkroon.sbs is currently suspended & undergoing maintenance.";
-  const typingSpeed = 36;
-  const initialShowDuration = 2200;
-  const repeatInterval = 3000;
-  const repeatShowDuration = 1400;
+  const typingSpeed = 36;            // ms per character
+  const initialShowDuration = 3500;  // how long banner stays visible on first load (ms)
+  const repeatInterval = 3000;       // how often banner reappears (ms)
+  const repeatShowDuration = 1800;   // how long each repeat appearance stays visible (ms)
   const storageKey = "siteNoticeDismissed_v1";
 
+  // ---------- Elements ----------
   const banner = document.getElementById("site-notice");
   const typedEl = document.getElementById("notice-typed");
   const closeBtn = document.getElementById("notice-close");
   const detailsBtn = document.getElementById("notice-details");
   const moreEl = document.getElementById("notice-more");
 
+  // ---------- State ----------
   let repeatTimer = null;
   let hideTimeout = null;
-  let typingAnimation = null;
+  let typingTimeouts = []; // store timeouts for typing so we can clear them
   let dismissed = false;
 
+  // If user previously dismissed, keep hidden and do nothing
   if (localStorage.getItem(storageKey) === "true") {
     dismissed = true;
     banner.classList.add("hidden");
@@ -341,19 +347,32 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const prefersReduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+  // ---------- Helpers ----------
   function adjustBodyPadding() {
-    if (banner.classList.contains("hidden") || banner.getBoundingClientRect().height === 0) {
+    // If banner hidden, remove padding
+    if (banner.classList.contains("hidden")) {
       document.body.style.paddingTop = "";
       return;
     }
+    // Measure and set padding so nav/logo are pushed down
     const rect = banner.getBoundingClientRect();
-    document.body.style.paddingTop = Math.ceil(rect.height) + "px";
+    if (rect && rect.height) {
+      document.body.style.paddingTop = Math.ceil(rect.height) + "px";
+    }
   }
 
-  function typeText(el, text, speed, callback) {
+  function clearTyping() {
+    typingTimeouts.forEach(id => clearTimeout(id));
+    typingTimeouts = [];
+    typedEl.classList.remove("cursor");
+  }
+
+  // Typing effect that completes before hide timer starts
+  function typeText(el, text, speed, onComplete) {
+    clearTyping();
     if (prefersReduced) {
       el.textContent = text;
-      if (callback) callback();
+      if (onComplete) onComplete();
       return;
     }
     el.textContent = "";
@@ -364,50 +383,64 @@ document.addEventListener('DOMContentLoaded', () => {
         el.textContent += text.charAt(i);
         i++;
         const jitter = Math.random() * 18 - 9;
-        typingAnimation = setTimeout(step, Math.max(8, speed + jitter));
+        const id = setTimeout(step, Math.max(8, speed + jitter));
+        typingTimeouts.push(id);
       } else {
         el.classList.remove("cursor");
-        if (callback) callback();
+        if (onComplete) onComplete();
       }
     }
     step();
   }
 
+  // Show banner and ensure typing completes before hide timer begins
   function showBanner(duration) {
     if (dismissed) return;
-    clearTimeout(hideTimeout);
+    // Clear any pending hide
+    if (hideTimeout) {
+      clearTimeout(hideTimeout);
+      hideTimeout = null;
+    }
+
+    // Make visible
     banner.classList.remove("hidden");
     banner.classList.add("show");
     banner.setAttribute("aria-hidden", "false");
-    clearTyping();
-    typeText(typedEl, fullMessage, typingSpeed);
-    setTimeout(adjustBodyPadding, 420);
-    if (duration && duration > 0) {
-      hideTimeout = setTimeout(() => {
-        hideBanner();
-      }, duration);
-    }
+
+    // Start typing; when typing completes, start hide timer (duration)
+    typeText(typedEl, fullMessage, typingSpeed, function () {
+      // After typing completes, start hide timer if duration provided
+      if (duration && duration > 0) {
+        hideTimeout = setTimeout(hideBanner, duration);
+      }
+    });
+
+    // Adjust padding after CSS transition time
+    setTimeout(adjustBodyPadding, 460);
   }
 
   function hideBanner() {
+    // Hide visually
     banner.classList.remove("show");
     banner.classList.add("hidden");
     banner.setAttribute("aria-hidden", "true");
+    // Clear typing and text
     clearTyping();
     typedEl.textContent = "";
+    // Remove padding
     document.body.style.paddingTop = "";
   }
 
-  function clearTyping() {
-    if (typingAnimation) {
-      clearTimeout(typingAnimation);
-      typingAnimation = null;
-    }
-    typedEl.classList.remove("cursor");
-  }
-
   function startRepeating() {
+    // Clear existing interval if any
+    if (repeatTimer) clearInterval(repeatTimer);
+    // Use setInterval to show banner every repeatInterval
     repeatTimer = setInterval(() => {
+      // If dismissed, stop repeating
+      if (dismissed) {
+        stopRepeating();
+        return;
+      }
       showBanner(repeatShowDuration);
     }, repeatInterval);
   }
@@ -423,13 +456,12 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  // ---------- Event handlers ----------
   closeBtn.addEventListener("click", function () {
     dismissed = true;
     stopRepeating();
     hideBanner();
-    try {
-      localStorage.setItem(storageKey, "true");
-    } catch (e) { /* ignore */ }
+    try { localStorage.setItem(storageKey, "true"); } catch (e) { /* ignore */ }
   });
 
   detailsBtn.addEventListener("click", function () {
@@ -447,27 +479,27 @@ document.addEventListener('DOMContentLoaded', () => {
 
   document.addEventListener("keydown", function (e) {
     if (e.key === "Escape") {
-      if (!banner.classList.contains("hidden")) {
-        closeBtn.click();
-      }
+      if (!banner.classList.contains("hidden")) closeBtn.click();
     }
   });
 
+  // ---------- Initialization on load ----------
   window.addEventListener("load", function () {
+    // Show immediately on load for initialShowDuration
     showBanner(initialShowDuration);
+
+    // Start repeating after initial show completes (buffer)
     setTimeout(() => {
-      if (dismissed) return;
-      startRepeating();
+      if (!dismissed) startRepeating();
     }, initialShowDuration + 200);
   });
 
+  // Keep padding correct on resize
   window.addEventListener("resize", adjustBodyPadding);
 
-  if (prefersReduced) {
-    typedEl.textContent = fullMessage;
-  }
+  // If reduced motion, show static message on first show
+  if (prefersReduced) typedEl.textContent = fullMessage;
 })();
-
 
 // END OF WEBSITE SUSPENDED ANIMATION NOTIFICATION //
 
